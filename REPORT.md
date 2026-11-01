@@ -2,11 +2,9 @@
 
 Keep this concise and specific to your implementation.
 
+###### 
 
-
-## 1\. Initial analysis
-
-###### Data from Baseline Test:
+###### Data from Baseline:
 
 **Locations**: 2500
 
@@ -18,29 +16,45 @@ Keep this concise and specific to your implementation.
 
 **Checksum**: 6267100
 
+###### 
+
+###### Test summary:
+
+Total 6; failed 0; succeeded 3; skipped 3; duration 0,8s;
+
+
+
+
+
+## 1\. Initial analysis
+
 
 
 * **How are locations and connections represented in the baseline?**
 
+In the Baseline code, the Locations and Connections are represented by the way we search through them when we run RunBaseLine().
 
+We call upon the methods FindLocationByID() and FindOutgoinfConnections() from WorldQueries, which in turn goes through
+
+lists for locations and Connections found in WorldData.
 
 
 
 * **Which operations appear frequent?**
 
-
+There's a lot of for-loops and linear searching.
 
 
 
 * **Which operation(s) do you predict may scale poorly?**
 
-
+The linear searches, i.e the one in FindLocationByID, can possibly scale poorly depending on the size of ID's availabe.
 
 
 
 * **What will you investigate first?**
 
-
+I will begin to investigate what sorting and searching algorithms there are and if any can become more efficient.
 
 
 
@@ -95,8 +109,4 @@ Briefly describe relevant assistance, if any.
 ## 9\. VG extension
 
 Only if attempting VG: heuristic, traversal constraints, correctness, and Dijkstra/A\* comparison.
-
-
-
-
 
