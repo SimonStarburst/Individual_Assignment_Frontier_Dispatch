@@ -31,7 +31,10 @@ namespace FrontierDispatch.Core
         public void Enqueue(T item, int priority)
         {
             // TODO: insert the new entry and restore the min-heap invariant.
-            throw new NotImplementedException();
+            
+            
+            _heap.Add(new <Entry>(item, priority));
+
         }
 
         /// <summary>
@@ -65,7 +68,7 @@ namespace FrontierDispatch.Core
             if (_heap.Count == 0)
             {
                 throw new InvalidOperationException("Heap is empty")
-            }
+            } 
 
             throw new NotImplementedException();
         }
