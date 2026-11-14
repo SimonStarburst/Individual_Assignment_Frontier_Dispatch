@@ -18,6 +18,8 @@ namespace FrontierDispatch.Core
     public sealed class WorldQueries
     {
         private readonly WorldData _world;
+        private readonly Dictionary<int, Location> _locationDictionary = new Dictionary<int, Location>();
+
 
         public WorldQueries(WorldData world)
         {
@@ -26,16 +28,27 @@ namespace FrontierDispatch.Core
 
         public Location? FindLocationById(int id)
         {
-            for (int i = 0; i < _world.Locations.Count; ++i)
+
+
+            if (_locationDictionary.TryGetValue(id, out var location))
             {
-                Location location = _world.Locations[i];
-                if (location.Id == id)
-                {
-                    return location;
-                }
+                return location;
+            }
+            else
+            {
+                return null;
             }
 
-            return null;
+            //for (int i = 0; i < _world.Locations.Count; ++i)
+            //{
+            //    Location location = _world.Locations[i];
+            //    if (location.Id == id)
+            //    {
+            //        return location;
+            //    }
+            //}
+
+            //return null;
         }
 
         public IReadOnlyList<Connection> FindOutgoingConnections(int fromLocationId)
@@ -51,6 +64,16 @@ namespace FrontierDispatch.Core
             }
 
             return result;
+        }
+
+        public void AddToDictionary()
+        {
+            for (int i = 0; i < _world.Locations.Count; ++i)
+            {
+                Location location = _world.Locations[i];
+                int id = location.Id;
+                _locationDictionary.Add(id, location);
+            }
         }
 
         //public static void InsertionSort(int[] array)

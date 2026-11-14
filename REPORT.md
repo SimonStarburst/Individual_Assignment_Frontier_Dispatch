@@ -66,7 +66,7 @@ Explain your route finder at a useful high level and how the travel-budget query
 
 |Operation|Your representation/algorithm|Complexity|Short explanation|
 |-|-|-|-|
-|Find location by ID||||
+|Find location by ID|Dictionary||I add all the locations to a dictionary, where the ID is the Key \& "Location" is the value.|
 |Get outgoing connections||||
 |Priority queue enqueue||||
 |Priority queue dequeue-min||||
