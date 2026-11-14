@@ -24,15 +24,16 @@ namespace FrontierDispatch.Core
         public WorldQueries(WorldData world)
         {
             _world = world ?? throw new ArgumentNullException(nameof(world));
+            AddToDictionary(_locationDictionary<>);
         }
 
         public Location? FindLocationById(int id)
         {
-
-
+            Location foundLocation;
             if (_locationDictionary.TryGetValue(id, out var location))
             {
-                return location;
+                foundLocation = location;
+                return foundLocation;
             }
             else
             {
@@ -66,7 +67,7 @@ namespace FrontierDispatch.Core
             return result;
         }
 
-        public void AddToDictionary()
+        public void AddToDictionary(Dictionary<int, Location>)
         {
             for (int i = 0; i < _world.Locations.Count; ++i)
             {
