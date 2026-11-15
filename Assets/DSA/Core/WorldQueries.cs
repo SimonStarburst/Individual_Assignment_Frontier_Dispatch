@@ -19,22 +19,20 @@ namespace FrontierDispatch.Core
     {
         private readonly WorldData _world;
 
+
         public WorldQueries(WorldData world)
         {
             _world = world ?? throw new ArgumentNullException(nameof(world));
+            //AddToDictionary(_world);
         }
 
         public Location? FindLocationById(int id)
         {
-            for (int i = 0; i < _world.Locations.Count; ++i)
+            Location location;
+            if (_world.LocationDictionary.TryGetValue(id, out location))
             {
-                Location location = _world.Locations[i];
-                if (location.Id == id)
-                {
-                    return location;
-                }
+                return location;
             }
-
             return null;
         }
 
@@ -52,27 +50,5 @@ namespace FrontierDispatch.Core
 
             return result;
         }
-
-        //public static void InsertionSort(int[] array)
-        //{
-        //    if (array == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(array));
-        //    }
-
-        //    for (int i = 1; i < array.Length; ++i)
-        //    {
-        //        int key = array[i];
-        //        int j = i - 1;
-
-        //        while (j >= 0 && array[j] > key)
-        //        {
-        //            array[j + 1] = array[j];
-        //            --j;
-        //        }
-
-        //        array[j + 1] = key;
-        //    }
-        //}
     }
 }
