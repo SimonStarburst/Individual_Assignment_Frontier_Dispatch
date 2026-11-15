@@ -58,35 +58,49 @@ I will begin to investigate what sorting and searching algorithms there are and 
 
 Describe important changes/retained choices, operations affected, and time/memory trade-offs.
 
+
+
 ## 3\. Algorithms and adaptation
 
 Explain your route finder at a useful high level and how the travel-budget query adapts the same ideas.
+
+
 
 ## 4\. Complexity
 
 |Operation|Your representation/algorithm|Complexity|Short explanation|
 |-|-|-|-|
-|Find location by ID|Dictionary||I add all the locations to a dictionary, where the ID is the Key \& "Location" is the value.|
+|Find location by ID|Dictionary|It's a tad bit more complex from the get go, but it's an investment to be able to search more efficiently in the future.|I add all the locations to a dictionary, where the ID is the Key \& "Location" is the value.|
 |Get outgoing connections||||
 |Priority queue enqueue||||
 |Priority queue dequeue-min||||
 |Route finding||||
 
+## 
+
 ## 5\. Correctness and testing
 
 Important tests/edge cases and what they demonstrate.
+
+
 
 ## 6\. Performance investigation
 
 Record reproducible before/after measurements for loading/preparation, repeated runtime work, and relevant allocation behavior. Explain what changed and why.
 
+
+
 ## 7\. Development reflection
 
 Describe one bug, wrong assumption, failed approach, or surprising result and how you investigated it.
 
+
+
 ## 8\. Tools and AI assistance
 
 Briefly describe relevant assistance, if any.
+
+
 
 ## 9\. VG extension
 
