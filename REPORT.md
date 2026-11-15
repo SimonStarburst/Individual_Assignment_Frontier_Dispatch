@@ -71,7 +71,7 @@ Explain your route finder at a useful high level and how the travel-budget query
 |Operation|Your representation/algorithm|Complexity|Short explanation|
 |-|-|-|-|
 |Find location by ID|Dictionary|It's a tad bit more complex from the get go, but it's an investment to be able to search more efficiently in the future.|I add all the locations to a dictionary, where the ID is the Key \& "Location" is the value.|
-|Get outgoing connections||||
+|Get outgoing connections|Hash Table||Making buckets where FromLocationId is key and ToLocationId is the value, makes it easy to search which ID's go from which locations.|
 |Priority queue enqueue||||
 |Priority queue dequeue-min||||
 |Route finding||||
