@@ -23,7 +23,6 @@ namespace FrontierDispatch.Core
         public WorldQueries(WorldData world)
         {
             _world = world ?? throw new ArgumentNullException(nameof(world));
-            //AddToDictionary(_world);
         }
 
         public Location? FindLocationById(int id)
@@ -38,15 +37,21 @@ namespace FrontierDispatch.Core
 
         public IReadOnlyList<Connection> FindOutgoingConnections(int fromLocationId)
         {
+            var connectionList = new List<Connection>();
             var result = new List<Connection>();
-            for (int i = 0; i < _world.Connections.Count; ++i)
+            if (_world.ConnectionDictionary.TryGetValue(fromLocationId, out connectionList))
             {
-                Connection connection = _world.Connections[i];
-                if (connection.FromLocationId == fromLocationId)
-                {
-                    result.Add(connection);
-                }
+
             }
+            
+            //for (int i = 0; i < _world.Connections.Count; ++i)
+            //{
+            //    Connection connection = _world.Connections[i];
+            //    if (connection.FromLocationId == fromLocationId)
+            //    {
+            //        result.Add(connection);
+            //    }
+            //}
 
             return result;
         }
