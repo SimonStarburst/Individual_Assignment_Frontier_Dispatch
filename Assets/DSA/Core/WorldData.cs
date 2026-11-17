@@ -37,17 +37,26 @@ namespace FrontierDispatch.Core
             }
         }
 
-        private void AddConnection(Connection[] _incomingConnection)
-        {
-            foreach (Connection connections in _incomingConnection)
-            {                    
-                List<Connection> toLocations = new List<Connection>();
-                if (!_connectionDictionary.ContainsKey(connections.FromLocationId))
-                {
-                    toLocations.Add(connections);                
-                    _connectionDictionary.Add(connections.FromLocationId, toLocations);
-                }                
+        private void AddConnection(Connection[] _incomingConnections)
+        {                   
+            int id = 0;
+            
+            foreach (Connection connection in _incomingConnections)
+            {
+                var toLocations = new List<Connection>();
+                _connectionDictionary.Add(id, toLocations);
             }
+
+            //for (int i = 0; i < _incomingConnections.Length; i++)
+            //{           
+            //    var toLocations = new List<Connection>();
+                
+                
+                
+                
+            //    _connectionDictionary.Add(i, toLocations);  
+            //}
+
         }
     }
 }

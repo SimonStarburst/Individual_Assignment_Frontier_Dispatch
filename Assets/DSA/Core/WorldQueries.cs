@@ -36,13 +36,15 @@ namespace FrontierDispatch.Core
         }
 
         public IReadOnlyList<Connection> FindOutgoingConnections(int fromLocationId)
-        {
-            var connectionList = new List<Connection>();
+        {            
+            
             var result = new List<Connection>();
-            if (_world.ConnectionDictionary.TryGetValue(fromLocationId, out connectionList))
-            {
 
-            }
+            //var connectionList = new List<Connection>();
+            //if (_world.ConnectionDictionary.TryGetValue(fromLocationId, out connectionList))
+            //{
+
+            //}
             
             //for (int i = 0; i < _world.Connections.Count; ++i)
             //{
