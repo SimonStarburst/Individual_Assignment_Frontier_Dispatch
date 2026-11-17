@@ -39,12 +39,18 @@ namespace FrontierDispatch.Core
 
         private void AddConnection(Connection[] _incomingConnections)
         {                   
-            int id = 0;
+
             
             foreach (Connection connection in _incomingConnections)
-            {
+            {          
+                
+                int id = connection.FromLocationId;
                 var toLocations = new List<Connection>();
+                if(_connectionDictionary.TryGetValue()
+
+
                 _connectionDictionary.Add(id, toLocations);
+
             }
 
             //for (int i = 0; i < _incomingConnections.Length; i++)
