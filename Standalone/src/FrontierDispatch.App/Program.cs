@@ -21,10 +21,16 @@ Console.WriteLine("Run with --baseline to record the supplied baseline workload.
 
 static void RunBaseline()
 {
+    var sw = Stopwatch.StartNew();
+    long worldBefore = GC.GetAllocatedBytesForCurrentThread();
     // Build the dataset before timing the repeated runtime queries.
     // This baseline therefore measures query work, not world construction.
     WorldData world = WorldDatasetFactory.CreateMedium();
     var queries = new WorldQueries(world);
+    long worldAfter = GC.GetAllocatedBytesForCurrentThread();
+
+    sw.Stop();
+
 
     // The checksum provides a stable sanity check that the workload still
     // produces equivalent results after implementation changes.
@@ -32,7 +38,8 @@ static void RunBaseline()
 
     const int iterations = 5000;
 
-    var sw = Stopwatch.StartNew();
+    var sw2 = Stopwatch.StartNew();
+    long queryBefore = GC.GetAllocatedBytesForCurrentThread();
 
     for (int i = 0; i < iterations; ++i)
     {
@@ -44,14 +51,23 @@ static void RunBaseline()
         checksum += location?.Id ?? 0;
         checksum += queries.FindOutgoingConnections(id).Count;
     }
+    long queryAfter = GC.GetAllocatedBytesForCurrentThread();
 
-    sw.Stop();
+    sw2.Stop();
+
+    long worldTotal = worldAfter - worldBefore;
+    long queryTotal = queryAfter - queryBefore;
+
 
     Console.WriteLine("Baseline world-query workload");
     Console.WriteLine($"Locations: {world.Locations.Count}");
     Console.WriteLine($"Connections: {world.Connections.Count}");
     Console.WriteLine($"Iterations: {iterations}");
-    Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds} ms");
+    Console.WriteLine($"World time Elapsed: {sw.ElapsedMilliseconds:F3} ms");
+    Console.WriteLine($"Query time Elapsed: {sw2.ElapsedMilliseconds:F3} ms");
+    Console.WriteLine($"World allocation: {worldTotal}");
+    Console.WriteLine($"Query allocation: {queryTotal}");
+
     Console.WriteLine($"Checksum: {checksum}");
     Console.WriteLine("Absolute time varies by machine. Keep this result for before/after comparison.");
 }

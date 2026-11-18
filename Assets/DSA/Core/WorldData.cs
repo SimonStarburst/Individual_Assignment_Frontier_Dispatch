@@ -8,7 +8,7 @@ namespace FrontierDispatch.Core
         private readonly Location[] _locations;
         private readonly Connection[] _connections;
         private readonly Dictionary<int, Location> _locationDictionary;
-        private readonly Dictionary<int, List<int>> _connectionDictionary;
+        private readonly Dictionary<int, List<Connection>> _connectionDictionary;
 
 
         public WorldData(IEnumerable<Location> locations, IEnumerable<Connection> connections)
@@ -18,7 +18,7 @@ namespace FrontierDispatch.Core
             _locations = new List<Location>(locations).ToArray();
             _connections = new List<Connection>(connections).ToArray();
             _locationDictionary = new Dictionary<int, Location>();
-            _connectionDictionary = new Dictionary<int, List<int>>();
+            _connectionDictionary = new Dictionary<int, List<Connection>>();
             AddLocation(_locations);
             AddConnection(_connections);
         }
@@ -26,7 +26,7 @@ namespace FrontierDispatch.Core
         public IReadOnlyList<Location> Locations => _locations;
         public IReadOnlyList<Connection> Connections => _connections;
         public IReadOnlyDictionary<int, Location> LocationDictionary => _locationDictionary;
-        public IReadOnlyDictionary<int, List<int>> ConnectionDictionary => _connectionDictionary;
+        public IReadOnlyDictionary<int, List<Connection>> ConnectionDictionary => _connectionDictionary;
             
             
         public void AddLocation(Location[] _incomingLocation)
@@ -44,13 +44,13 @@ namespace FrontierDispatch.Core
             {
                 if (!_connectionDictionary.ContainsKey(fromConnection.FromLocationId))
                 {
-                    _connectionDictionary.Add(fromConnection.FromLocationId, new List<int>());
+                    _connectionDictionary.Add(fromConnection.FromLocationId, new List<Connection>());
                 }
             }
 
             foreach (Connection toConnection in _incomingConnections)
             {
-                _connectionDictionary[toConnection.FromLocationId].Add(toConnection.ToLocationId);
+                _connectionDictionary[toConnection.FromLocationId].Add(toConnection);
             }
         }
     }

@@ -4,24 +4,6 @@ Keep this concise and specific to your implementation.
 
 
 
-###### Data from Baseline:
-
-**Locations**: 2500
-
-**Connections**: 9800
-
-**Iterations**: 5000
-
-**Elapsed**: 549 ms
-
-**Checksum**: 6267100
-
-###### 
-
-###### Test summary:
-
-Total 6; failed 0; succeeded 3; skipped 3; duration 0,8s;
-
 
 
 ## 1\. Initial analysis
@@ -87,6 +69,45 @@ Important tests/edge cases and what they demonstrate.
 ## 6\. Performance investigation
 
 Record reproducible before/after measurements for loading/preparation, repeated runtime work, and relevant allocation behavior. Explain what changed and why.
+
+
+
+###### Before implementing any changes:
+
+###### Data from Baseline:
+
+**Locations**: 2500
+
+**Connections**: 9800
+
+**Iterations**: 5000
+
+**Elapsed**: 549 ms
+
+**Checksum**: 6267100
+
+###### 
+
+###### Test summary:
+
+Total 6; failed 0; succeeded 3; skipped 3; duration 0,8s;
+
+
+
+||**Before implementing any changes:**|**After implementing any changes:**|
+|-|-|-|
+|**Locations**|2500|2500|
+|**Connections**|9800|9800|
+|**Iterations**|5000|5000|
+|**Elapsed (World)**|-|3,000 ms|
+|**Elapsed (Query)**|549 ms|0 ms|
+|**Elocation (World)**|-|1744368|
+|**Elocation (Query)**|-|160000|
+|**Checksum**|6267100|6267100|
+
+
+
+
 
 
 
