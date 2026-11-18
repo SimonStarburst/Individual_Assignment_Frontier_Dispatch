@@ -40,20 +40,7 @@ namespace FrontierDispatch.Core
             
             var result = new List<Connection>();
 
-            //var connectionList = new List<Connection>();
-            //if (_world.ConnectionDictionary.TryGetValue(fromLocationId, out connectionList))
-            //{
 
-            //}
-            
-            //for (int i = 0; i < _world.Connections.Count; ++i)
-            //{
-            //    Connection connection = _world.Connections[i];
-            //    if (connection.FromLocationId == fromLocationId)
-            //    {
-            //        result.Add(connection);
-            //    }
-            //}
 
             return result;
         }

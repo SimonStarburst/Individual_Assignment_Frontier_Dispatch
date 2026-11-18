@@ -8,7 +8,7 @@ namespace FrontierDispatch.Core
         private readonly Location[] _locations;
         private readonly Connection[] _connections;
         private readonly Dictionary<int, Location> _locationDictionary;
-        private readonly Dictionary<int, List<Connection>> _connectionDictionary;
+        private readonly Dictionary<int, List<int>> _connectionDictionary;
 
 
         public WorldData(IEnumerable<Location> locations, IEnumerable<Connection> connections)
@@ -18,7 +18,7 @@ namespace FrontierDispatch.Core
             _locations = new List<Location>(locations).ToArray();
             _connections = new List<Connection>(connections).ToArray();
             _locationDictionary = new Dictionary<int, Location>();
-            _connectionDictionary = new Dictionary<int, List<Connection>>();
+            _connectionDictionary = new Dictionary<int, List<int>>();
             AddLocation(_locations);
             AddConnection(_connections);
         }
@@ -26,7 +26,7 @@ namespace FrontierDispatch.Core
         public IReadOnlyList<Location> Locations => _locations;
         public IReadOnlyList<Connection> Connections => _connections;
         public IReadOnlyDictionary<int, Location> LocationDictionary => _locationDictionary;
-        public IReadOnlyDictionary<int, List<Connection>> ConnectionDictionary => _connectionDictionary;
+        public IReadOnlyDictionary<int, List<int>> ConnectionDictionary => _connectionDictionary;
             
             
         public void AddLocation(Location[] _incomingLocation)
@@ -38,31 +38,20 @@ namespace FrontierDispatch.Core
         }
 
         private void AddConnection(Connection[] _incomingConnections)
-        {                   
+        {
 
-            
-            foreach (Connection connection in _incomingConnections)
-            {          
-                
-                int id = connection.FromLocationId;
-                var toLocations = new List<Connection>();
-                if(_connectionDictionary.TryGetValue()
-
-
-                _connectionDictionary.Add(id, toLocations);
-
+            foreach (Connection fromConnection in _incomingConnections)
+            {
+                if (!_connectionDictionary.ContainsKey(fromConnection.FromLocationId))
+                {
+                    _connectionDictionary.Add(fromConnection.FromLocationId, new List<int>());
+                }
             }
 
-            //for (int i = 0; i < _incomingConnections.Length; i++)
-            //{           
-            //    var toLocations = new List<Connection>();
-                
-                
-                
-                
-            //    _connectionDictionary.Add(i, toLocations);  
-            //}
-
+            foreach (Connection toConnection in _incomingConnections)
+            {
+                _connectionDictionary[toConnection.FromLocationId].Add(toConnection.ToLocationId);
+            }
         }
     }
 }
