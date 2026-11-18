@@ -19,8 +19,8 @@ namespace FrontierDispatch.Core
             _connections = new List<Connection>(connections).ToArray();
             _locationDictionary = new Dictionary<int, Location>();
             _connectionDictionary = new Dictionary<int, List<Connection>>();
-            AddLocation(_locations);
-            AddConnection(_connections);
+            AddLocation(locations);
+            AddConnection(connections);
         }
 
         public IReadOnlyList<Location> Locations => _locations;
@@ -29,7 +29,7 @@ namespace FrontierDispatch.Core
         public IReadOnlyDictionary<int, List<Connection>> ConnectionDictionary => _connectionDictionary;
             
             
-        public void AddLocation(Location[] _incomingLocation)
+        public void AddLocation(IEnumerable<Location> _incomingLocation)
         {
             foreach (Location locations in _incomingLocation)
             {
@@ -37,9 +37,8 @@ namespace FrontierDispatch.Core
             }
         }
 
-        private void AddConnection(Connection[] _incomingConnections)
+        private void AddConnection(IEnumerable<Connection> _incomingConnections)
         {
-
             foreach (Connection fromConnection in _incomingConnections)
             {
                 if (!_connectionDictionary.ContainsKey(fromConnection.FromLocationId))
