@@ -30,8 +30,7 @@ namespace FrontierDispatch.Core
         /// </summary>
         public void Enqueue(T item, int priority)
         {
-            // TODO: insert the new entry and restore the min-heap invariant.
-            throw new NotImplementedException();
+            _heap.Add(new Entry(item, priority));
         }
 
         /// <summary>
@@ -42,8 +41,13 @@ namespace FrontierDispatch.Core
         /// </exception>
         public T Peek()
         {
-            // TODO: return the current minimum without changing the queue.
-            throw new NotImplementedException();
+            // Message showing when queue is empty.
+            if (_heap.Count == 0)
+            {
+                throw new InvalidOperationException("The queue is empty.");
+            }
+
+            return _heap[0].Item;
         }
 
         /// <summary>
@@ -54,6 +58,13 @@ namespace FrontierDispatch.Core
         /// </exception>
         public T Dequeue()
         {
+            // Message showing when queue is empty.
+            if (_heap.Count == 0)
+            {
+                throw new InvalidOperationException("The queue is empty.");
+            }
+
+
             // TODO: remove the minimum item and restore the min-heap invariant.
             throw new NotImplementedException();
         }

@@ -125,5 +125,5 @@ Briefly describe relevant assistance, if any.
 
 ## 9\. VG extension
 
-Only if attempting VG: heuristic, traversal constraints, correctness, and Dijkstra/A\* comparison.
+\-
 
