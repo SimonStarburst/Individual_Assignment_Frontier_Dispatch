@@ -42,9 +42,17 @@ Describe important changes/retained choices, operations affected, and time/memor
 
 
 
+(Example, what was affected when changing to a dictionary? What were the trade-offs? Why did I retain choices?)
+
+
+
 ## 3\. Algorithms and adaptation
 
 Explain your route finder at a useful high level and how the travel-budget query adapts the same ideas.
+
+
+
+(Example 
 
 
 
@@ -53,7 +61,7 @@ Explain your route finder at a useful high level and how the travel-budget query
 |Operation|Your representation/algorithm|Complexity|Short explanation|
 |-|-|-|-|
 |Find location by ID|Dictionary|It's a tad bit more complex from the get go, but it's an investment to be able to search more efficiently in the future.|I add all the locations to a dictionary, where the ID is the Key \& "Location" is the value.|
-|Get outgoing connections|Hash Table||Making buckets where FromLocationId is key and ToLocationId is the value, makes it easy to search which ID's go from which locations.|
+|Get outgoing connections|Adjecancy|||
 |Priority queue enqueue||||
 |Priority queue dequeue-min||||
 |Route finding||||
@@ -63,6 +71,10 @@ Explain your route finder at a useful high level and how the travel-budget query
 ## 5\. Correctness and testing
 
 Important tests/edge cases and what they demonstrate.
+
+
+
+(Example, what existing and self-made tests bring. List of meaningful tests and observed results)
 
 
 
@@ -101,8 +113,8 @@ Total 6; failed 0; succeeded 3; skipped 3; duration 0,8s;
 |**Iterations**|5000|5000|
 |**Elapsed (World)**|-|3,000 ms|
 |**Elapsed (Query)**|549 ms|0 ms|
-|**Elocation (World)**|-|1744368|
-|**Elocation (Query)**|-|160000|
+|**Allocation (World)**|-|1744368|
+|**Allocation (Query)**|-|160000|
 |**Checksum**|6267100|6267100|
 
 
@@ -125,5 +137,7 @@ Briefly describe relevant assistance, if any.
 
 ## 9\. VG extension
 
-\-
+
+
+Not working towards VG
 
