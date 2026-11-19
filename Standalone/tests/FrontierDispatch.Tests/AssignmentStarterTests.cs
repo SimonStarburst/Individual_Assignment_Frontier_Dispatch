@@ -43,7 +43,7 @@ namespace FrontierDispatch.Tests
 
         #region Phase 4 Tests
 
-        [Test, Ignore("Phase 4: enable when implementing Dijkstra route finding.")]
+        [Test]
         public void Dijkstra_StartEqualsGoal_ReturnsZeroCostRoute()
         {
             var finder = new DijkstraRouteFinder(WorldDatasetFactory.CreateSmall());
