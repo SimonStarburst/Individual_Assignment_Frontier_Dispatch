@@ -66,7 +66,7 @@ namespace FrontierDispatch.Core
             }
 
             // The result of the dequeuing is the first item in the queue
-            Entry result = _heap[0];
+            T result = _heap[0].Item;
 
             // the number of the last index in the queue is the amount of items in the queue
             // minus 1, since the index count starts at 0

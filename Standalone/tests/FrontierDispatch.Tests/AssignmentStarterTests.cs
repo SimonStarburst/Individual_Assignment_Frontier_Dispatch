@@ -16,7 +16,11 @@ namespace FrontierDispatch.Tests
         // These tests document later assignment contracts without making the
         // untouched baseline red. Remove Ignore when you reach the named phase.
 
-        [Test("Phase 3: enable when implementing the binary min-heap priority queue.")]
+
+        #region Phase 4 Tests
+
+
+        [Test]
         public void PriorityQueue_EnqueueAndDequeue_ReturnsLowestPriorityFirst()
         {
             var queue = new MinPriorityQueue<string>();
@@ -25,6 +29,8 @@ namespace FrontierDispatch.Tests
             queue.Enqueue("medium", 5);
             Assert.That(queue.Dequeue(), Is.EqualTo("cheap"));
         }
+
+        #endregion  
 
         [Test, Ignore("Phase 4: enable when implementing Dijkstra route finding.")]
         public void Dijkstra_StartEqualsGoal_ReturnsZeroCostRoute()
