@@ -17,8 +17,7 @@ namespace FrontierDispatch.Tests
         // untouched baseline red. Remove Ignore when you reach the named phase.
 
 
-        #region Phase 4 Tests
-
+        #region Phase 3 Tests
 
         [Test]
         public void PriorityQueue_EnqueueAndDequeue_ReturnsLowestPriorityFirst()
@@ -30,7 +29,19 @@ namespace FrontierDispatch.Tests
             Assert.That(queue.Dequeue(), Is.EqualTo("cheap"));
         }
 
-        #endregion  
+        [Test]
+        public void PriorityQueue_Peek_PeekLowestPriority()
+        {
+            var queue = new MinPriorityQueue<string>();
+            queue.Enqueue("expensive", 9);
+            queue.Enqueue("cheap", 2);
+            queue.Enqueue("medium", 5);
+            Assert.That(queue.Peek(), Is.EqualTo("cheap"));
+        }
+
+        #endregion
+
+        #region Phase 4 Tests
 
         [Test, Ignore("Phase 4: enable when implementing Dijkstra route finding.")]
         public void Dijkstra_StartEqualsGoal_ReturnsZeroCostRoute()
@@ -41,6 +52,9 @@ namespace FrontierDispatch.Tests
             Assert.That(result.TotalCost, Is.EqualTo(0));
             Assert.That(result.LocationIds, Is.EqualTo(new[] { 0 }));
         }
+        #endregion
+
+        #region Phase 5 Tests
 
         [Test, Ignore("Phase 5: enable when implementing bounded reachability.")]
         public void Reachability_ZeroBudget_IncludesStartAtZeroCost()
@@ -50,5 +64,7 @@ namespace FrontierDispatch.Tests
             Assert.That(result.ContainsKey(0), Is.True);
             Assert.That(result[0], Is.EqualTo(0));
         }
+        #endregion
+
     }
 }
