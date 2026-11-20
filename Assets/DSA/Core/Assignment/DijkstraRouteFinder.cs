@@ -25,9 +25,6 @@ namespace FrontierDispatch.Core
             _world = world ?? throw new ArgumentNullException(nameof(world));
         }
 
-
-
-
         /// <summary>
         /// Finds a minimum-total-travel-cost route from the start location
         /// to the goal location.
@@ -53,12 +50,7 @@ namespace FrontierDispatch.Core
             int expandedNodes = 0;
 
             while (queue.Count > 0)
-            {
-                // Changed Entry to public, maybe change that back and find another way?
-
-                //MinPriorityQueue<int> entry = queue.Dequeue();
-                //int current = entry.Priority;
-                
+            {                
                 int current = queue.Dequeue();
 
                 if (!bestCost.TryGetValue(current, out int currentBest) || current != currentBest)
@@ -82,9 +74,7 @@ namespace FrontierDispatch.Core
 
             }
 
-            // TODO: implement Dijkstra using your prepared world representation
-            // and MinPriorityQueue<T>.
-
+            // Returns following RouteResult if path was not found.
             return new RouteResult(false, Array.Empty<int>(), 0, expandedNodes);
         }
     }
