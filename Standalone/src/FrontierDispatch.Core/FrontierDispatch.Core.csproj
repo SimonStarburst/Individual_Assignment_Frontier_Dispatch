@@ -9,4 +9,7 @@
   <ItemGroup>
     <Compile Include="../../../Assets/DSA/Core/**/*.cs" LinkBase="Core" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Collections" Version="4.3.0" />
+  </ItemGroup>
 </Project>

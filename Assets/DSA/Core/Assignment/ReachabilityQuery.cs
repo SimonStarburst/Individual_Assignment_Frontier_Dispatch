@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace FrontierDispatch.Core
@@ -68,6 +70,11 @@ namespace FrontierDispatch.Core
 
                 ++expandedNodes;
 
+                if (queue)  // IF WHAT SIMON, IF WHAT?!
+                {
+                    return ReverseBuild(startLocationId, currentBest, expandedNodes, cameFrom);
+                }
+
                 foreach (Connection connection in _world.ConnectionDictionary[current])
                 {
                     int toLocationId = connection.ToLocationId;
@@ -82,11 +89,33 @@ namespace FrontierDispatch.Core
                 }
 
             }
+            //return;       //RETURN WHAT SIMON, WHAT?!
+        }
 
-            var reversed = new Dictionary<int, int>(); 
+        private static Dictionary<int, int> ReverseBuild(            
+            int startLocationId, 
+            int totalCost, 
+            int expandedNodes,
+            Dictionary<int, int> cameFrom)
+        {
+            if (cameFrom == null)
+            {
+                throw new ArgumentNullException(nameof(cameFrom));
+            }
 
+            var reversed = new Dictionary<int, int>();
+            int current = totalCost;
+            reversed.Add(current, totalCost);
 
-            //return;
+            while (current != startLocationId)
+            {
+                current = cameFrom[current];
+                reversed.Add(current, totalCost);
+            }
+
+            reversed.Reverse();
+            return reversed;
+
         }
     }
 }
