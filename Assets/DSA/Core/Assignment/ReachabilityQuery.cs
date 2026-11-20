@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace FrontierDispatch.Core
 {
@@ -40,6 +41,13 @@ namespace FrontierDispatch.Core
         {
             // TODO: adapt shortest-path reasoning to the travel-cost budget.
 
+            // Message showing when startLocationId or maxTravelCost are 0, since Dijkstra
+            // doesn't like negative numbers.
+            if (startLocationId < 0 || maxTravelCost < 0)
+            {
+                throw new InvalidOperationException("Start location Id and/or Travel Cost cannot be less than 0");
+            }
+
             var bestCost = new Dictionary<int, int>();
             var cameFrom = new Dictionary<int, int>();
             var queue = new MinPriorityQueue<int>();
@@ -60,25 +68,25 @@ namespace FrontierDispatch.Core
 
                 ++expandedNodes;
 
-                foreach ()
+                foreach (Connection connection in _world.ConnectionDictionary[current])
                 {
-                    
-                }
-                
-                int candidate = checked(currentBest);
+                    int toLocationId = connection.ToLocationId;
+                    int candidate = checked(currentBest + connection.TravelCost);
 
-                if (!bestCost.TryGetValue())
-                {
-                    bestCost[] = candidate;
-                    cameFrom[] = current;
-                    queue.Enqueue(, candidate);
+                    if (!bestCost.TryGetValue(toLocationId, out int known) || candidate < known)
+                    {
+                        bestCost[toLocationId] = candidate;
+                        cameFrom[toLocationId] = current;
+                        queue.Enqueue(toLocationId, candidate);
+                    }
                 }
 
             }
+
+            var reversed = new Dictionary<int, int>(); 
+
+
+            //return;
         }
-
-
-
-
     }
 }
