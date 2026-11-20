@@ -84,28 +84,6 @@ Record reproducible before/after measurements for loading/preparation, repeated 
 
 
 
-###### Before implementing any changes:
-
-###### Data from Baseline:
-
-**Locations**: 2500
-
-**Connections**: 9800
-
-**Iterations**: 5000
-
-**Elapsed**: 549 ms
-
-**Checksum**: 6267100
-
-###### 
-
-###### Test summary:
-
-Total 6; failed 0; succeeded 3; skipped 3; duration 0,8s;
-
-
-
 ||**Before implementing any changes:**|**After implementing any changes:**|
 |-|-|-|
 |**Locations**|2500|2500|
@@ -131,7 +109,7 @@ Describe one bug, wrong assumption, failed approach, or surprising result and ho
 
 ## 8\. Tools and AI assistance
 
-No AI assistance was used, I did however analyze previous labs and slides to get inspiration on how to write some of the scripts.
+No AI assistance were used, I did however analyze previous labs and slides to get inspiration on how to write some of the scripts.
 
 
 

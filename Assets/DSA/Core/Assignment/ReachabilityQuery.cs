@@ -39,7 +39,46 @@ namespace FrontierDispatch.Core
         public IReadOnlyDictionary<int, int> FindReachable(int startLocationId, int maxTravelCost)
         {
             // TODO: adapt shortest-path reasoning to the travel-cost budget.
-            throw new NotImplementedException();
+
+            var bestCost = new Dictionary<int, int>();
+            var cameFrom = new Dictionary<int, int>();
+            var queue = new MinPriorityQueue<int>();
+
+            bestCost[startLocationId] = 0;
+            queue.Enqueue(startLocationId, 0);
+
+            int expandedNodes = 0;
+
+            while (queue.Count > 0)
+            {
+                int current = queue.Dequeue();
+
+                if (!bestCost.TryGetValue(current, out int currentBest) || current != currentBest)
+                {
+                    continue;
+                }
+
+                ++expandedNodes;
+
+                foreach ()
+                {
+                    
+                }
+                
+                int candidate = checked(currentBest);
+
+                if (!bestCost.TryGetValue())
+                {
+                    bestCost[] = candidate;
+                    cameFrom[] = current;
+                    queue.Enqueue(, candidate);
+                }
+
+            }
         }
+
+
+
+
     }
 }
