@@ -52,7 +52,7 @@ Explain your route finder at a useful high level and how the travel-budget query
 
 
 
-(Example 
+(Example
 
 
 
@@ -131,7 +131,7 @@ Describe one bug, wrong assumption, failed approach, or surprising result and ho
 
 ## 8\. Tools and AI assistance
 
-Briefly describe relevant assistance, if any.
+No AI assistance was used, I did however analyze previous labs and slides to get inspiration on how to write some of the scripts.
 
 
 

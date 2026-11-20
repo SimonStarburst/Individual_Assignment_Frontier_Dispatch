@@ -40,16 +40,49 @@ namespace FrontierDispatch.Core
         
             if (startLocationId == goalLocationId)
             {
-                return RouteResult(true, new[] { startLocationId }, 0, 0);
+                return new RouteResult(true, new[] { startLocationId }, 0, 0);
             }
 
-            var bestCost = new Dictionary<string, int>();
-            var cameFrom = new Dictionary<string, string>();
+            var bestCost = new Dictionary<int, int>();
+            var cameFrom = new Dictionary<int, int>();
             var queue = new MinPriorityQueue<int>();
+
+            bestCost[startLocationId] = 0;
+            queue.Enqueue(startLocationId, 0);
+
+            int expandedNodes = 0;
+
+            while (queue.Count > 0)
+            {
+                // Changed Entry to public, maybe change that back and find another way?
+
+                MinPriorityQueue<int>.Entry entry = queue.Dequeue();
+                int current = entry.Priority;
+
+                if (!bestCost.TryGetValue(current, out int currentBest) || entry.Priority != currentBest)
+                {
+                    continue;
+                }
+
+                ++expandedNodes;
+
+                // If the int current is the same as the int goalLocationId, return with the following data:
+
+                // - Boolean for if location has been found returning as true.
+                // - A list of locationIds.
+                // - The total cost.
+                // - How many "nodes" have been expanded.
+
+                if (current == goalLocationId)
+                {
+                    return new RouteResult(true, new[] { startLocationId }, 0, expandedNodes);
+                }
+
+            }
 
             // TODO: implement Dijkstra using your prepared world representation
             // and MinPriorityQueue<T>.
-            throw new NotImplementedException();
+
         }
     }
 }

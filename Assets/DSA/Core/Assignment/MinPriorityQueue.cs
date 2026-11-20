@@ -166,7 +166,7 @@ namespace FrontierDispatch.Core
         /// <summary>
         /// Stores one item together with the priority used by the heap.
         /// </summary>
-        private readonly struct Entry
+        public readonly struct Entry
         {
             public Entry(T item, int priority)
             {
