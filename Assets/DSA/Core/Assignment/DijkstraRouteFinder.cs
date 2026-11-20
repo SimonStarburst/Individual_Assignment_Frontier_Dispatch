@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace FrontierDispatch.Core
 {
@@ -24,6 +25,9 @@ namespace FrontierDispatch.Core
             _world = world ?? throw new ArgumentNullException(nameof(world));
         }
 
+
+
+
         /// <summary>
         /// Finds a minimum-total-travel-cost route from the start location
         /// to the goal location.
@@ -33,6 +37,16 @@ namespace FrontierDispatch.Core
         /// </summary>
         public RouteResult FindRoute(int startLocationId, int goalLocationId)
         {
+        
+            if (startLocationId == goalLocationId)
+            {
+                return RouteResult(true, new[] { startLocationId }, 0, 0);
+            }
+
+            var bestCost = new Dictionary<string, int>();
+            var cameFrom = new Dictionary<string, string>();
+            var queue = new MinPriorityQueue<int>();
+
             // TODO: implement Dijkstra using your prepared world representation
             // and MinPriorityQueue<T>.
             throw new NotImplementedException();

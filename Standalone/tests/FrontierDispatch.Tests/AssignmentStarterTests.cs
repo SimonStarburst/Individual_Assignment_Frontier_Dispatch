@@ -46,19 +46,20 @@ namespace FrontierDispatch.Tests
         {
             var queue = new MinPriorityQueue<int>();
 
-            foreach (int values in priorities)
+            foreach (int value in priorities)
             {
-                queue.Enqueue(values, values);
+                queue.Enqueue(value, value);
             }
 
-            Assert.That(queue.Dequeue(), Is.EqualTo(1));
+            var actual = queue.Dequeue();
+            Assert.That(actual, Is.EqualTo(1));
         }
 
         #endregion
 
         #region Phase 4 Tests
 
-        [Test, Ignore("Phase 4")]
+        [Test]
         public void Dijkstra_StartEqualsGoal_ReturnsZeroCostRoute()
         {
             var finder = new DijkstraRouteFinder(WorldDatasetFactory.CreateSmall());
