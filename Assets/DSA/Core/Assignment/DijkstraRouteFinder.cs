@@ -56,10 +56,12 @@ namespace FrontierDispatch.Core
             {
                 // Changed Entry to public, maybe change that back and find another way?
 
-                MinPriorityQueue<int>.Entry entry = queue.Dequeue();
-                int current = entry.Priority;
+                //MinPriorityQueue<int> entry = queue.Dequeue();
+                //int current = entry.Priority;
+                
+                int current = queue.Dequeue();
 
-                if (!bestCost.TryGetValue(current, out int currentBest) || entry.Priority != currentBest)
+                if (!bestCost.TryGetValue(current, out int currentBest) || current != currentBest)
                 {
                     continue;
                 }
@@ -83,6 +85,7 @@ namespace FrontierDispatch.Core
             // TODO: implement Dijkstra using your prepared world representation
             // and MinPriorityQueue<T>.
 
+            return new RouteResult(false, Array.Empty<int>(), 0, expandedNodes);
         }
     }
 }

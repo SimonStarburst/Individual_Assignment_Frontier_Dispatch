@@ -68,6 +68,9 @@ namespace FrontierDispatch.Tests
             Assert.That(result.TotalCost, Is.EqualTo(0));
             Assert.That(result.LocationIds, Is.EqualTo(new[] { 0 }));
         }
+
+
+
         #endregion
 
         #region Phase 5 Tests
