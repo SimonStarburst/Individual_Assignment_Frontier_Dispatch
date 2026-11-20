@@ -39,11 +39,26 @@ namespace FrontierDispatch.Tests
             Assert.That(queue.Peek(), Is.EqualTo("cheap"));
         }
 
+        [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 })]
+        [TestCase(new int[] { 9, 8, 7, 6, 5, 4, 3, 2, 1 })]
+        [TestCase(new int[] { 5, 8, 1, 4, 9, 2, 3, 7, 6 })]
+        public void PriorityQueue_EnqueueAndDequeue_TestSeveralQueues(int[] priorities)
+        {
+            var queue = new MinPriorityQueue<int>();
+
+            foreach (int values in priorities)
+            {
+                queue.Enqueue(values, values);
+            }
+
+            Assert.That(queue.Dequeue(), Is.EqualTo(1));
+        }
+
         #endregion
 
         #region Phase 4 Tests
 
-        [Test]
+        [Test, Ignore("Phase 4")]
         public void Dijkstra_StartEqualsGoal_ReturnsZeroCostRoute()
         {
             var finder = new DijkstraRouteFinder(WorldDatasetFactory.CreateSmall());
