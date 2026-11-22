@@ -99,6 +99,15 @@ namespace FrontierDispatch.Tests
             Assert.That(result.ContainsKey(0), Is.True);
             Assert.That(result[0], Is.EqualTo(0));
         }
+
+        [Test]
+        public void Reachability_RouteNotFound()
+        {
+            var query = new ReachabilityQuery(WorldDatasetFactory.CreateSmall());
+
+        }
+
+
         #endregion
 
     }

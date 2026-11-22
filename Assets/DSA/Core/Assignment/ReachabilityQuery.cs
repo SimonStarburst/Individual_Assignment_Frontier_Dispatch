@@ -53,6 +53,7 @@ namespace FrontierDispatch.Core
             var bestCost = new Dictionary<int, int>();
             var cameFrom = new Dictionary<int, int>();
             var queue = new MinPriorityQueue<int>();
+            var notFound = new Dictionary<int, int>();
 
             bestCost[startLocationId] = 0;
             queue.Enqueue(startLocationId, 0);
@@ -89,7 +90,7 @@ namespace FrontierDispatch.Core
                 }
 
             }
-            return new Dictionary<int, int>();
+            return notFound;
         }
 
         private static Dictionary<int, int> ReverseBuild(            
