@@ -70,7 +70,7 @@ namespace FrontierDispatch.Core
 
                 ++expandedNodes;
 
-                if (queue)  // IF WHAT SIMON, IF WHAT?!
+                if (current == maxTravelCost)
                 {
                     return ReverseBuild(startLocationId, currentBest, expandedNodes, cameFrom);
                 }
@@ -89,7 +89,7 @@ namespace FrontierDispatch.Core
                 }
 
             }
-            //return;       //RETURN WHAT SIMON, WHAT?!
+            return new Dictionary<int, int>();
         }
 
         private static Dictionary<int, int> ReverseBuild(            
