@@ -71,7 +71,7 @@ namespace FrontierDispatch.Core
 
                 ++expandedNodes;
 
-                if (current == maxTravelCost)
+                if (current == maxTravelCost)   // This is not working, it just finishes within one loop!
                 {
                     return ReverseBuild(startLocationId, currentBest, expandedNodes, cameFrom);
                 }
@@ -90,7 +90,8 @@ namespace FrontierDispatch.Core
                 }
 
             }
-            return notFound;
+            return notFound;    // This return is not working, it should return if location was not found within 
+                                // maxTravelCost, but I can't figure it out...
         }
 
         private static Dictionary<int, int> ReverseBuild(            
