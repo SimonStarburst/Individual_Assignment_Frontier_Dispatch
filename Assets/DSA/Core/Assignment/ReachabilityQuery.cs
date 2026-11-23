@@ -53,7 +53,6 @@ namespace FrontierDispatch.Core
             var bestCost = new Dictionary<int, int>();
             var cameFrom = new Dictionary<int, int>();
             var queue = new MinPriorityQueue<int>();
-            var notFound = new Dictionary<int, int>();
 
             bestCost[startLocationId] = 0;
             queue.Enqueue(startLocationId, 0);

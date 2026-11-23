@@ -97,14 +97,16 @@ namespace FrontierDispatch.Tests
             var query = new ReachabilityQuery(WorldDatasetFactory.CreateSmall());
             var result = query.FindReachable(0, 0);
             Assert.That(result.ContainsKey(0), Is.True);
-            Assert.That(result[0], Is.EqualTo(0));
+            Assert.That(result[0], Is.EqualTo(5));
         }
 
         [Test]
-        public void Reachability_RouteNotFound()
+        public void Reachability_FiveMaxTravelCost()
         {
             var query = new ReachabilityQuery(WorldDatasetFactory.CreateSmall());
-
+            var result = query.FindReachable(0, 5);
+            Assert.That(result.ContainsKey(0), Is.True);
+            Assert.That(result[0], Is.EqualTo(0));
         }
 
 
