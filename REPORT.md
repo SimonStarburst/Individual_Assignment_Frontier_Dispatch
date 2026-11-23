@@ -44,7 +44,9 @@ I will begin to investigate what sorting and searching algorithms there are and 
 
 
 
+The data was much more efficiently handled when changing to Dictionaries. Adding everything into a list is simple to implement and on a smaller data scale, it might not make a huge dent in performance, but with more data and the requirement to be able to search through it quickly, A dictionary is much more efficient I've learned.
 
+Something I chose to retain however were the arrays/lists of Locations and Connections in WorldData. This decision was made for no other reason than I had a hard time removing them and change all the other scripts they were connected to. I think I managed to implement them however.
 
 
 
@@ -53,6 +55,12 @@ I will begin to investigate what sorting and searching algorithms there are and 
 *Explain your route finder at a useful high level and how the travel-budget query adapts the same ideas.*
 
 
+
+I will be brutally honest and say that the route finder is hard for me to explain. I had a hard time learning Dijkstra, hard time absorbing the code, the theory behind it, how it works and an even harder time creating the route finder and Travel budget. I don't even know if I did the scripts correctly.
+
+
+
+The route finder is ***supposed*** to go through a MinPrioQueue and while the amount of items of the queue are more than 0, it will loop the process. We're supposedly using a Dictionary called best cost to save the current best cost for the 
 
 
 

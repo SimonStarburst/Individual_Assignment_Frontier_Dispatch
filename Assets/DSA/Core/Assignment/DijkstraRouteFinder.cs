@@ -34,7 +34,7 @@ namespace FrontierDispatch.Core
         /// </summary>
         public RouteResult FindRoute(int startLocationId, int goalLocationId)
         {
-        
+
             if (startLocationId == goalLocationId)
             {
                 return new RouteResult(true, new[] { startLocationId }, 0, 0);
@@ -42,18 +42,19 @@ namespace FrontierDispatch.Core
 
             var bestCost = new Dictionary<int, int>();
             var cameFrom = new Dictionary<int, int>();
-            var queue = new MinPriorityQueue<int>();
+            var frontier = new MinPriorityQueue<int>();
 
             bestCost[startLocationId] = 0;
-            queue.Enqueue(startLocationId, 0);
+            frontier.Enqueue(startLocationId, 0);
 
             int expandedNodes = 0;
 
-            while (queue.Count > 0)
-            {                
-                int current = queue.Dequeue();
+            while (frontier.Count > 0)
+            {
+                MinPriorityQueue<int>.Entry current = frontier.Peek();
+                frontier.Dequeue();
 
-                if (!bestCost.TryGetValue(current, out int currentBest) || current != currentBest)
+                if (current.Priority > bestCost[current.Item])
                 {
                     continue;
                 }
@@ -67,15 +68,46 @@ namespace FrontierDispatch.Core
                 // - The total cost.
                 // - How many "nodes" have been expanded.
 
-                if (current == goalLocationId)
+                if (current.Item == goalLocationId)
                 {
                     return new RouteResult(true, new[] { startLocationId }, 0, expandedNodes);
                 }
 
+                foreach (Connection connection in _world.ConnectionDictionary[current.Item])
+                {
+                    int currentCost = bestCost[connection.FromLocationId] + connection.TravelCost;
+
+
+                    if (!bestCost.ContainsKey(connection.ToLocationId) || currentCost < bestCost[connection.ToLocationId])
+                    {
+                        bestCost[connection.ToLocationId] = currentCost;
+                        cameFrom[connection.ToLocationId] = connection.FromLocationId;
+                        frontier.Enqueue(connection.ToLocationId, bestCost[connection.ToLocationId]);
+                    }
+                }
+
+
             }
 
-            // Returns following RouteResult if path was not found.
-            return new RouteResult(false, Array.Empty<int>(), 0, expandedNodes);
+            return RouteResult.NotFound(expandedNodes);
+        
+
+
+
+            IReadOnlyList<int> Path()        
+            {           
+                List<int> path = new();
+                int current = goalLocationId;
+                path.Add(current);
+                while (current != startLocationId)            
+                {              
+                    current = cameFrom[current];                
+                    path.Add(current);            
+                }
+                            
+                path.Reverse();            
+                return path;        
+            }        
         }
     }
 }

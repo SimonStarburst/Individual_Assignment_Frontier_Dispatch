@@ -87,63 +87,9 @@ namespace FrontierDispatch.Core
                     }
 
                 }
-
-
-                //int current = frontier.Dequeue();
-
-                //if (!bestCost.TryGetValue(current, out int currentBest) || current != currentBest)
-                //{
-                //    continue;
-                //}
-
-                //++expandedNodes;
-
-                //if (current == maxTravelCost)   // This is not working, it just finishes within one loop!
-                //{
-                //    return ReverseBuild(startLocationId, currentBest, expandedNodes, cameFrom);
-                //}
-
-                //foreach (Connection connection in _world.ConnectionDictionary[current])
-                //{
-                //    int toLocationId = connection.ToLocationId;
-                //    int candidate = checked(currentBest + connection.TravelCost);
-
-                //    if (!bestCost.TryGetValue(toLocationId, out int known) || candidate < known)
-                //    {
-                //        bestCost[toLocationId] = candidate;
-                //        cameFrom[toLocationId] = current;
-                //        frontier.Enqueue(toLocationId, candidate);
-                //    }
-                //}
-
             }
+
             return bestCost;
         }
-
-        //private static Dictionary<int, int> ReverseBuild(            
-        //    int startLocationId, 
-        //    int totalCost, 
-        //    int expandedNodes,
-        //    Dictionary<int, int> cameFrom)
-        //{
-        //    if (cameFrom == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(cameFrom));
-        //    }
-
-        //    var reversed = new Dictionary<int, int>();
-        //    int current = totalCost;
-        //    reversed.Add(current, totalCost);
-
-        //    while (current != startLocationId)
-        //    {
-        //        current = cameFrom[current];
-        //        reversed.Add(current, totalCost);
-        //    }
-
-        //    reversed.Reverse();
-        //    return reversed;
-
-        //}
     }
 }

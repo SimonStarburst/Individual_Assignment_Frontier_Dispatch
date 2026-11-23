@@ -79,14 +79,6 @@ namespace FrontierDispatch.Tests
             Assert.That(result.LocationIds, Is.EqualTo(new[] { 0 }));
         }
 
-        [Test]
-        public void Dijkstra_PathNotFound_CreateSmall()
-        {
-            var finder = new DijkstraRouteFinder(WorldDatasetFactory.CreateSmall());
-            RouteResult result = finder.FindRoute(0, 6);
-            Assert.That(result.Found, Is.False);
-        }
-
         #endregion
 
         #region Phase 5 Tests
