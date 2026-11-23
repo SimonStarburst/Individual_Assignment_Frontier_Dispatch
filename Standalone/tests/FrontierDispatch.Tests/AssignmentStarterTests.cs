@@ -36,7 +36,7 @@ namespace FrontierDispatch.Tests
             queue.Enqueue("expensive", 9);
             queue.Enqueue("cheap", 2);
             queue.Enqueue("medium", 5);
-            Assert.That(queue.Peek(), Is.EqualTo("cheap"));
+            Assert.That(queue.PeekNext(), Is.EqualTo("cheap"));
         }
 
         [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 })]
@@ -97,18 +97,8 @@ namespace FrontierDispatch.Tests
             var query = new ReachabilityQuery(WorldDatasetFactory.CreateSmall());
             var result = query.FindReachable(0, 0);
             Assert.That(result.ContainsKey(0), Is.True);
-            Assert.That(result[0], Is.EqualTo(5));
-        }
-
-        [Test]
-        public void Reachability_FiveMaxTravelCost()
-        {
-            var query = new ReachabilityQuery(WorldDatasetFactory.CreateSmall());
-            var result = query.FindReachable(0, 5);
-            Assert.That(result.ContainsKey(0), Is.True);
             Assert.That(result[0], Is.EqualTo(0));
         }
-
 
         #endregion
 

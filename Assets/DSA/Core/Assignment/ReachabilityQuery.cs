@@ -51,72 +51,99 @@ namespace FrontierDispatch.Core
             }
 
             var bestCost = new Dictionary<int, int>();
-            var cameFrom = new Dictionary<int, int>();
-            var queue = new MinPriorityQueue<int>();
+            var frontier = new MinPriorityQueue<int>();
 
             bestCost[startLocationId] = 0;
-            queue.Enqueue(startLocationId, 0);
+            frontier.Enqueue(startLocationId, 0);
 
-            int expandedNodes = 0;
-
-            while (queue.Count > 0)
+            while (frontier.Count > 0)
             {
-                int current = queue.Dequeue();
+                MinPriorityQueue<int>.Entry current = frontier.Peek();
+                frontier.Dequeue();
 
-                if (!bestCost.TryGetValue(current, out int currentBest) || current != currentBest)
+
+                if (current.Priority > bestCost[current.Item]) 
                 {
                     continue;
                 }
 
-                ++expandedNodes;
 
-                if (current == maxTravelCost)   // This is not working, it just finishes within one loop!
+                foreach (Connection connection in _world.ConnectionDictionary[current.Item])
                 {
-                    return ReverseBuild(startLocationId, currentBest, expandedNodes, cameFrom);
-                }
+                    int currentCost = bestCost[connection.FromLocationId] + connection.TravelCost;
 
-                foreach (Connection connection in _world.ConnectionDictionary[current])
-                {
-                    int toLocationId = connection.ToLocationId;
-                    int candidate = checked(currentBest + connection.TravelCost);
-
-                    if (!bestCost.TryGetValue(toLocationId, out int known) || candidate < known)
+                    // If
+                    // 1. bestCost doesn't contain a Key for the ToLocationId of "connection" OR currentCost is less than the value of the ToLocationId of the connection in bestCost
+                    // AND
+                    // 2. currentCost is less or equal to maxTravelCost
+                    if ((!bestCost.ContainsKey(connection.ToLocationId) || currentCost < bestCost[connection.ToLocationId]) && currentCost <= maxTravelCost)
                     {
-                        bestCost[toLocationId] = candidate;
-                        cameFrom[toLocationId] = current;
-                        queue.Enqueue(toLocationId, candidate);
+                        // Change the value of the ToLocationId of the connection in bestCost
+                        bestCost[connection.ToLocationId] = currentCost;
+
+                        // Enqueue a new Entry in frontier, where the number of the ToLocationId of the connection, from the foreach-loop, is the Item and
+                        // the number of the ToLocationId of the connection, from the dictionary bestCost, is the Priority
+                        frontier.Enqueue(connection.ToLocationId, bestCost[connection.ToLocationId]);      
                     }
+
                 }
 
+
+                //int current = frontier.Dequeue();
+
+                //if (!bestCost.TryGetValue(current, out int currentBest) || current != currentBest)
+                //{
+                //    continue;
+                //}
+
+                //++expandedNodes;
+
+                //if (current == maxTravelCost)   // This is not working, it just finishes within one loop!
+                //{
+                //    return ReverseBuild(startLocationId, currentBest, expandedNodes, cameFrom);
+                //}
+
+                //foreach (Connection connection in _world.ConnectionDictionary[current])
+                //{
+                //    int toLocationId = connection.ToLocationId;
+                //    int candidate = checked(currentBest + connection.TravelCost);
+
+                //    if (!bestCost.TryGetValue(toLocationId, out int known) || candidate < known)
+                //    {
+                //        bestCost[toLocationId] = candidate;
+                //        cameFrom[toLocationId] = current;
+                //        frontier.Enqueue(toLocationId, candidate);
+                //    }
+                //}
+
             }
-            return notFound;    // This return is not working, it should return if location was not found within 
-                                // maxTravelCost, but I can't figure it out...
+            return bestCost;
         }
 
-        private static Dictionary<int, int> ReverseBuild(            
-            int startLocationId, 
-            int totalCost, 
-            int expandedNodes,
-            Dictionary<int, int> cameFrom)
-        {
-            if (cameFrom == null)
-            {
-                throw new ArgumentNullException(nameof(cameFrom));
-            }
+        //private static Dictionary<int, int> ReverseBuild(            
+        //    int startLocationId, 
+        //    int totalCost, 
+        //    int expandedNodes,
+        //    Dictionary<int, int> cameFrom)
+        //{
+        //    if (cameFrom == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(cameFrom));
+        //    }
 
-            var reversed = new Dictionary<int, int>();
-            int current = totalCost;
-            reversed.Add(current, totalCost);
+        //    var reversed = new Dictionary<int, int>();
+        //    int current = totalCost;
+        //    reversed.Add(current, totalCost);
 
-            while (current != startLocationId)
-            {
-                current = cameFrom[current];
-                reversed.Add(current, totalCost);
-            }
+        //    while (current != startLocationId)
+        //    {
+        //        current = cameFrom[current];
+        //        reversed.Add(current, totalCost);
+        //    }
 
-            reversed.Reverse();
-            return reversed;
+        //    reversed.Reverse();
+        //    return reversed;
 
-        }
+        //}
     }
 }

@@ -40,7 +40,7 @@ namespace FrontierDispatch.Core
         /// <exception cref="InvalidOperationException">
         /// Thrown when the queue is empty.
         /// </exception>
-        public T Peek()
+        public T PeekNext()
         {
             // Message showing when queue is empty.
             if (_heap.Count == 0)
@@ -49,6 +49,11 @@ namespace FrontierDispatch.Core
             }
 
             return _heap[0].Item;
+        }
+
+        public Entry Peek()
+        {
+            return _heap[0];
         }
 
         /// <summary>
@@ -166,7 +171,7 @@ namespace FrontierDispatch.Core
         /// <summary>
         /// Stores one item together with the priority used by the heap.
         /// </summary>
-        public readonly struct Entry        // Changed this to public to be able to work with it easier in Phase 5
+        public readonly struct Entry    // Changed this to public to be able to work with it easier in Phase 5
         {
             public Entry(T item, int priority)
             {
