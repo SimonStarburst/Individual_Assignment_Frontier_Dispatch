@@ -63,8 +63,8 @@ I will begin to investigate what sorting and searching algorithms there are and 
 |Find location by ID|Dictionary.|It's a tad bit more complex from the get go, but it's an investment to be able to search more efficiently in the future.|I add all the locations to a dictionary, where the ID is the Key \& "Location" is the value.|
 |Get outgoing connections|Adjecancy list.|Adjecancy lists are not complex at all, since we are able to search for specific keys and get the specific data we want from them.|By using an adjecancy list I am able to save multiple amounts of values for each key. Each loop around the first foreach-loop, a key and list of values is added to the Dictionary. The second foreach-loop adds the to-connections.|
 |Priority queue enqueue|List.|Enqueuing new entries does not take much at all in the beginning, but the more we add, the more relative sorting needs to be done. The more items are in the list, the more complex  it gets.|The list is not made of a singular variable, but rather of a struct called Entry, which in turn contains T for item and int for priority.|
-|Priority queue dequeue-min||||
-|Route finding||||
+|Priority queue dequeue-min|Queue|While dequeuing the correct item is O(1), resorting the rest of the Heap will take longer time, with worst case scenario O(n)|Returns the lowest priority item from the PriorityQueue,|
+|Route finding|Dijkstra|O(V+E)|Dijkstra can be used to figure out the cheapest route from point A to point B in a graph. While the shortest route might be easy to find, it doesn't mean it's the cheapest.|
 
 ## 
 
@@ -101,6 +101,28 @@ Record reproducible before/after measurements for loading/preparation, repeated 
 
 
 
+* **Which change had the largest measured effect, and why do you think it helped?**
+
+The time elapsed when creating the world and query was significantly affected, mostly since we do not need to go through every entry in a list to figure it out anymore.
+
+
+
+* **Did any improvement trade additional memory for execution time, or vice versa?**
+
+
+
+
+
+* **Why is an asymptotically better approach not guaranteed to be faster for every tiny input?**
+
+
+
+
+
+* **What would you investigate next if the world became much larger?**
+
+
+
 
 
 
@@ -110,6 +132,8 @@ Record reproducible before/after measurements for loading/preparation, repeated 
 *Describe one bug, wrong assumption, failed approach, or surprising result and how you investigated it.*
 
 
+
+I've had several failed approaches with the assignment, but I have been able to learn from them all. I started off creating dictionaries for locations and connections in the script "WorldQueries", but ended up moving them to "WorldData, where it made more sense. I've also attempted several different algorithms for solutions, but ended up using mostly Lists and Dictionaries, the latter I had NO idea how useful they were before this course.
 
 
 
