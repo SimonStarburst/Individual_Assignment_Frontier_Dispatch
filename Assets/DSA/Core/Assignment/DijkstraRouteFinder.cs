@@ -61,22 +61,15 @@ namespace FrontierDispatch.Core
 
                 ++expandedNodes;
 
-                // If the int current is the same as the int goalLocationId, return with the following data:
-
-                // - Boolean for if location has been found returning as true.
-                // - A list of locationIds.
-                // - The total cost.
-                // - How many "nodes" have been expanded.
 
                 if (current.Item == goalLocationId)
                 {
-                    return new RouteResult(true, new[] { startLocationId }, 0, expandedNodes);
+                    return RouteResult.Success(Path(), bestCost[goalLocationId], expandedNodes);
                 }
 
                 foreach (Connection connection in _world.ConnectionDictionary[current.Item])
                 {
                     int currentCost = bestCost[connection.FromLocationId] + connection.TravelCost;
-
 
                     if (!bestCost.ContainsKey(connection.ToLocationId) || currentCost < bestCost[connection.ToLocationId])
                     {
@@ -85,13 +78,9 @@ namespace FrontierDispatch.Core
                         frontier.Enqueue(connection.ToLocationId, bestCost[connection.ToLocationId]);
                     }
                 }
-
-
             }
 
-            return RouteResult.NotFound(expandedNodes);
-        
-
+            return RouteResult.NotFound(expandedNodes);      
 
 
             IReadOnlyList<int> Path()        

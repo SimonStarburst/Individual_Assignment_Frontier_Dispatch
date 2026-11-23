@@ -40,6 +40,16 @@ namespace FrontierDispatch.Core
         /// </summary>
         public int ExpandedCount { get; }
 
+        public static RouteResult Success(IReadOnlyList<int> path, int totalCost, int expandedNodes)
+        {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+            
+            return new RouteResult(true, path, totalCost, expandedNodes);
+        }
+
 
         public static RouteResult NotFound(int expandedNodes)
         {

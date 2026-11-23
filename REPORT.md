@@ -60,7 +60,19 @@ I will be brutally honest and say that the route finder is hard for me to explai
 
 
 
-The route finder is ***supposed*** to go through a MinPrioQueue and while the amount of items of the queue are more than 0, it will loop the process. We're supposedly using a Dictionary called best cost to save the current best cost for the 
+I got some help from fellow classmates regarding the script writing and handling the logic.
+
+
+
+The route finder is ***supposed*** to go through a MinPrioQueue and while the amount of items of the queue are more than 0, it will loop the process. We're using a Dictionary called **bestCost** to save the currently known best cost for our little trip. By using another Dictionary, called **cameFrom**, we store which point we came from, rewriting previous parts of the Dictionary depending on if we find something more efficient.
+
+
+
+After we've found the correct path, we reverse it so that we can save the actual route.
+
+
+
+The main difference in the Travel Budget is that the routes costs differently, which makes **bestCost** even more important. Without that, we will be unable to keep track of the cheapest route, ergo making the entire script useless for that specific purpouse.
 
 
 
